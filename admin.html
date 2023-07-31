@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>密钥管理-OpenAI密钥管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <style>
+        body {
+            background: url(https://img.misaka.ren/bg2) no-repeat;
+            top: 0;
+            left: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center 0;
+        }
+
+        .bg {
+            background-color: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .background-color-transparent {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+        }
+    </style>
+</head>
+
+<body class="mdui-theme-primary-blue">
+    <div class="bg"></div>
+    <div class="mdui-container">
+        <div class="mdui-typo mdui-center">
+            <h2>密钥管理-OpenAI密钥管理</h2>
+            <div class="mdui-card background-color-transparent">
+                <div class="mdui-card-header">
+                    <img class="mdui-card-header-avatar" src="https://img.misaka.ren/avatar" />
+                    <div class="mdui-card-header-title">Provided by CloudFlare Worker</div>
+                    <div class="mdui-card-header-subtitle">Designed by M1saka</div>
+                </div>
+                <div class="mdui-card-media">
+                </div>
+                <div class="mdui-card-content">
+                    <form action="" method="post">
+                        <div class="mdui-textfield">
+                            <label class="mdui-textfield-label">Keys</label>
+                            <textarea class="mdui-textfield-input" name="keys" type="text" required>{{Keys}}</textarea>
+                            <input type="hidden" name="token" value="{{token}}" id="token"/>
+                            <input class="mdui-btn mdui-ripple mdui-m-t-2" type="submit" value="提交" />
+                        </div>
+                    </form>
+                </div>
+                <div class="mdui-card-actions">
+                    <button class="mdui-btn mdui-ripple" onclick="logout()">退出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdui-typo mdui-m-t-2">
+        <hr />
+    </div>
+    <div class="mdui-typo mdui-center mdui-m-a-2" style="text-align: center;">
+        <p>© 2023 M1saka</p>
+    </div>
+    </div>
+</body>
+<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+<script>
+    const message = "{{message}}";
+    if (message != "{{message}}") {
+        mdui.snackbar({
+            message: message,
+            position: "right-top"
+        });
+    }
+    let localToken = localStorage.getItem("token");
+    if (localToken != null && localToken != token) {
+        document.getElementById("token").value = localToken;
+        // 使用get请求检测token是否有效
+        const url = "/admin/check/" + localToken;
+        fetch(url, {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/urlencode"
+            }
+        }).then(res => {
+            if (res.status == 200) {
+                // 有效
+            } else {
+                localStorage.removeItem("token");
+                window.location.href = "/admin/login";
+            }
+        })
+    }
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/admin/login";
+    }
+</script>
+
+</html>

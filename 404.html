@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>404 页面未找到</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 白天模式样式 */
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #f0f0f0;
+            }
+
+            h1 {
+                color: #555;
+            }
+
+            p {
+                color: #888;
+            }
+
+            a {
+                color: #555;
+            }
+        }
+
+        /* 夜间模式样式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #333;
+            }
+
+            h1 {
+                color: #fff;
+            }
+
+            p {
+                color: #ccc;
+            }
+
+            a {
+                color: #fff;
+            }
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>404</h1>
+            <p>哎呀！你访问的页面不存在。</p>
+            <p>点击<a href="/">这里</a>返回主页。</p>
+        </div>
+    </div>
+</body>
+</html>
