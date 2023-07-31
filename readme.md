@@ -1,5 +1,7 @@
 # GPT-Key-Manager
 
+Chinese | [English](./readme_en.md)
+
 ## 简介
 
 基于CloudFlare Workers的GPT-Key管理器。
